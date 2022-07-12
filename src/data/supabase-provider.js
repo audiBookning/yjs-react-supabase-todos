@@ -20,7 +20,7 @@ function diffTwoObjects(object1, object2) {
 }
 
 // INFO: Main function to linkk supabase with yjs
-export const SupabaseProvider = (ymap, callback) => {
+export const initSupabaseProvider = (ymap, callback) => {
     if (supabaseClient) return supabaseClient
 
     supabaseClient = newClient()
@@ -66,13 +66,10 @@ export const SupabaseProvider = (ymap, callback) => {
 
 // INFO: util function used here to rename the keys createdAt and updatedAt for compatibility with Supabase
 function renameKeys(newKeys, obj) {
-    const keyValues = Object.keys(obj)
-        // TODO: filter editing key until schema is corrected to not use it
-        .filter((f) => f !== 'editing')
-        .map((key) => {
-            const newKey = newKeys[key] || key
-            return { [newKey]: obj[key] }
-        })
+    const keyValues = Object.keys(obj).map((key) => {
+        const newKey = newKeys[key] || key
+        return { [newKey]: obj[key] }
+    })
     return Object.assign({}, ...keyValues)
 }
 

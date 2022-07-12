@@ -1,12 +1,20 @@
 import { WebrtcProvider } from 'y-webrtc'
 import { v4 as uuidv4 } from 'uuid'
 import { todosMockDataHash } from './data'
+import { IndexeddbPersistence } from 'y-indexeddb'
 
+// INFO: adds Webrtc connection to yjs
 export function initWebrtcProvider(ydoc) {
     // Example of a static room name.
     // const roomName = 'testTodo01'
     const roomName = uuidv4()
     new WebrtcProvider(roomName, ydoc)
+}
+
+// INFO: adds offline persistence to yjs using Indexeddb
+export function initIndexeddbProvider(ydoc) {
+    const docName = 'testTodo01'
+    return new IndexeddbPersistence(docName, ydoc)
 }
 
 // INFO: util function to insert mock data in yjs

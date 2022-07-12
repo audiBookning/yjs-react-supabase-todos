@@ -5,8 +5,13 @@ import * as Y from 'yjs'
 
 import AddItem from './components/AddItem'
 
-import { SupabaseProvider } from './data/supabase-provider'
-import { getAllTodos, initMockData, initWebrtcProvider } from './data/yjs'
+import { initSupabaseProvider } from './data/supabase-provider'
+import {
+    getAllTodos,
+    initIndexeddbProvider,
+    initMockData,
+    initWebrtcProvider,
+} from './data/yjs'
 import { getNewTodo } from './data/data'
 
 // INFO: used to indentify the map type in the yjs Doc
@@ -30,12 +35,15 @@ function App() {
         let observer = false
 
         if (flag.current) {
-            SupabaseProvider(ymap, (bool) => {
+            // init the yjs provider
+            initSupabaseProvider(ymap, (bool) => {
                 observer = false
                 const tododoArray = getAllTodos(ymap)
                 setTodos(tododoArray)
             })
             initWebrtcProvider(doc.current)
+            initIndexeddbProvider(doc.current)
+
             initMockData(ymap)
             flag.current = false
         }
@@ -52,7 +60,6 @@ function App() {
             try {
                 const editedTodo = {
                     ...item,
-                    editing: false,
                     updatedAt: new Date().toISOString(),
                 }
                 ymap.set(item.id, editedTodo)
@@ -63,6 +70,7 @@ function App() {
             newTodo = getNewTodo(item.title)
             ymap.set(newTodo.id, newTodo)
         }
+        setEditTodo(null)
     }
 
     const toggleItem = (todo) => {
@@ -81,7 +89,6 @@ function App() {
     const editItem = (todo) => {
         const editedTodo = {
             ...todo,
-            editing: true,
             updatedAt: new Date().toISOString(),
         }
         ymap.set(todo.id, editedTodo)
@@ -115,7 +122,11 @@ function App() {
                                 <input
                                     type="checkbox"
                                     className="edit"
-                                    checked={item.editing}
+                                    checked={
+                                        editTodo
+                                            ? item.id === editTodo.id
+                                            : false
+                                    }
                                     onChange={() => editItem(item)}
                                 />
                                 <span className="label icon"></span>

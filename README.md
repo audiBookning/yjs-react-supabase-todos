@@ -1,19 +1,19 @@
-# Minimal YJs - React - Supabase Todo Sample test
+# Minimal (YJs - React - Supabase) offline first Todo Sample test web app
 
-Testing basic implementation and functionalities of YJs with a todo react app and a backup on Supabase. Note that supabase is not the source of truth here. It is just doing the job of a bacup server.
+Testing basic implementation and functionalities of YJs with a todo react app and a backup on Supabase. Note that supabase is not the "source of truth" here. It is just doing the job of a backup server. The "source of truth" are all the Yjs apps connected by Webrtc and each of their local Indexeddb databases.
 
-## Notes
+This app is only Offline first because the code is so simple. More complex apps will have to add apropriate Service workers or another alternative.
 
--   Based on [Minimal-React-Todo-boilerplate](https://github.com/audiBookning/Minimal-React-Todo-boilerplate) and keeping the same oversimplified/minimalist attitude, but using the more fiddly code in the branch "little-more-complex"
+## How to use
 
--   Unfortunatelly, the more i add, the harder it is to maintain a "easy to follow" code base
+-   This is just a basic create-react-app, so `npm start` is sufficent. For more see the "Create React App Readme" section.
 
--   The `.env.example` file should be renamed to something like `.env.local` (see react docs) and edited with the supabase credentials.
+-   The `.env.example` file should be renamed to something like `.env.local` or similar options (see react docs) and edited with the supabase credentials.
 
--   In Supabase one needs to create a table named `todos` with the following columns
+-   In Supabase dashboard one needs to create a table named `todos` with the following columns
 
     ```js
-    id: uuid
+    id: uuid, primary
     title: varchar
     state: bool
     created_at: timestamptz
@@ -22,11 +22,31 @@ Testing basic implementation and functionalities of YJs with a todo react app an
 
 -   To test the Webrtc feature of Yjs change the roomName variable in App.jsx to a constant (instead of using UUID) and start 2 different instances of react with `npm start`. Then the changes in one browser window will be reflected in the other.
 
+## Some definitions
+
+-   [Yjs](https://docs.yjs.dev/) is a high-performance CRDT for building collaborative applications that sync automatically. Modular building blocks for building collaborative applications like Google Docs and Figma.
+
+-   [React](https://reactjs.org/) is a JavaScript library for building user interfaces
+
+-   [Supabase](https://supabase.com/) is an open source Firebase alternative. Start your project with a Postgres Database, Authentication, instant APIs, Realtime subscriptions and Storage.
+
+-   With [WebRTC](https://webrtc.org/), you can add real-time communication capabilities to your application that works on top of an open standard. It supports video, voice, and generic data to be sent between peers, allowing developers to build powerful voice- and video-communication solutions. The technology is available on all modern browsers as well as on native clients for all major platforms.
+
+-   [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) is a low-level API for client-side storage of significant amounts of structured data, including files/blobs.
+
+## Notes
+
+-   Based on [Minimal-React-Todo-boilerplate](https://github.com/audiBookning/Minimal-React-Todo-boilerplate) and keeping the same oversimplified/minimalist attitude, but using the more fiddly code in the branch "little-more-complex"
+
+-   Unfortunatelly, the more i add, the harder it is to maintain a "easy to follow" code base
+
+-   Added offline persistence with Indexeddb
+
 ## Todos (code)
 
--   The editing property in the todos should be managed only by React, not Yjs.
-
 -   add tests
+
+-   The providers should be promisified?
 
 # Create React App Readme
 

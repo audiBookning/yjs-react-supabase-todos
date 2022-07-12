@@ -8,7 +8,6 @@ export const todosMockDataHash = {
         state: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        editing: false,
     },
     '039a6186-a69f-45cc-a57b-de8b3e5a8ca3': {
         id: '039a6186-a69f-45cc-a57b-de8b3e5a8ca3',
@@ -16,7 +15,6 @@ export const todosMockDataHash = {
         state: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        editing: false,
     },
     '3e1eb13e-2f35-4ea3-a054-4fdd9fa17b79': {
         id: '3e1eb13e-2f35-4ea3-a054-4fdd9fa17b79',
@@ -24,7 +22,6 @@ export const todosMockDataHash = {
         state: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        editing: false,
     },
     'ad8991b0-c834-47b5-9e88-4c4e686931b3': {
         id: 'ad8991b0-c834-47b5-9e88-4c4e686931b3',
@@ -32,7 +29,6 @@ export const todosMockDataHash = {
         state: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        editing: false,
     },
 }
 
@@ -41,7 +37,6 @@ export const getNewTodo = (title) => ({
     title: title,
     state: false,
     id: uuidv4(),
-    editing: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
 })
