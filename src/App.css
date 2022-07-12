@@ -1,0 +1,30 @@
+/* Gobal reset */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Item list */
+input[type=button].delete {
+  display: none;
+}
+input[type=checkbox].edit {
+  display: none;
+}
+
+.delete ~ span::before {
+  font-family: 'Material Symbols Outlined';
+  content: "\e872";
+}
+.edit ~ span::before {
+  font-family: 'Material Symbols Outlined';
+  content: "\e3c9";
+}
+.edit:checked ~ span::before {
+  font-family: 'Material Symbols Outlined';
+  content: '\e745'; }
+
+.completed {
+  text-decoration: line-through;
+}
